@@ -3,7 +3,7 @@
   <button {{action 'save'}}>✓</button>
   <button {{action 'cancel'}}>x</button>
 {{else}}
-  <a href="#" class="status" {{action 'edit'}}>
+  <a href="#" class="status internal--edit-button" {{action 'edit'}}>
     {{ clickableValue }}
   </a>
 {{/if}}
