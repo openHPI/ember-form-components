@@ -12,16 +12,16 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{editable-field}}`);
-
-  assert.equal(this.$().text(), '');
-
-  // Template block usage:
+  // We can pass text to show when editing
   this.render(hbs`
     {{#editable-field}}
-      template block text
+      show when editing
     {{/editable-field}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.ok(!this.$().text().includes('show when editing'));
+
+  // After clicking on the placeholder, we should see our passed text
+  this.$().find('a').click();
+  assert.ok(this.$().text().includes('show when editing'));
 });
