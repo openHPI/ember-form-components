@@ -14,7 +14,7 @@ To install the addon, run the following command in your Ember project:
 
 The addon features several easy-to-use Ember components.
 
-### editable-field
+### {{editable-field}}
 
 This component can be used as a replacement for the awesome [x-editable plugin](http://vitalets.github.io/x-editable/). It allows you to make text editable by clicking on it.
 
