@@ -20,8 +20,7 @@ export default Ember.Component.extend({
       this.set('isEditing', true);
     },
     cancel() {
-      this.set('isEditing', false);
-      this.set('value', this.get('original'));
+      this.cancel();
     },
     save() {
       this.set('isEditing', false);
@@ -29,6 +28,11 @@ export default Ember.Component.extend({
         this.get('onsave')();
       }
     }
+  },
+
+  cancel() {
+    this.set('isEditing', false);
+    this.set('value', this.get('original'));
   },
 
   /*
