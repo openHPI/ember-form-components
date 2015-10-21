@@ -1,0 +1,9 @@
+{{#if isEditing}}
+  {{yield (action 'save') (action 'cancel')}}
+  <button {{action 'save'}}>✓</button>
+  <button {{action 'cancel'}}>x</button>
+{{else}}
+  <a href="#" class="status" {{action 'edit'}}>
+    {{ clickableValue }}
+  </a>
+{{/if}}
