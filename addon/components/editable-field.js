@@ -36,6 +36,17 @@ export default Ember.Component.extend({
   },
 
   /*
+   * AUTOFOCUS
+   * Every time we enter editing mode, we try to focus the first focusable element we find.
+   */
+
+  autofocus: Ember.observer('isEditing', function() {
+    if (this.get('isEditing')) {
+      Ember.run.scheduleOnce('afterRender', () => this.$('input:not([disabled]),select:not([disabled]),textarea:not(disabled)').first().focus() );
+    }
+  }),
+
+  /*
    * CANCEL WHEN CLICKING OUTSIDE
    * If we're in editing mode, a click on the outside (somewhere on the document)
    * will cancel editing.
