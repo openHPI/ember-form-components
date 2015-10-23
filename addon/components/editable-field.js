@@ -40,7 +40,7 @@ export default Ember.Component.extend({
 
         // If the consumer passed a handler function that returns a promise,
         // wait for it to complete before marking the save operation as finished.
-        if (result.then) {
+        if (result && result.then) {
           return result.then(done);
         }
       }
