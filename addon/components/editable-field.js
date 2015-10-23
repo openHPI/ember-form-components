@@ -5,8 +5,10 @@ export default Ember.Component.extend({
   layout: layout,
 
   tagName: 'span',
+  classNameBindings: ['isSaving:saving'],
 
   isEditing: false,
+  isSaving: false,
   original: '',
   placeholder: '',
 
@@ -19,14 +21,31 @@ export default Ember.Component.extend({
       this.set('original', this.get('value'));
       this.set('isEditing', true);
     },
+
     cancel() {
       this.cancel();
     },
+
     save() {
-      this.set('isEditing', false);
-      if (this.get('onsave')) {
-        this.get('onsave')();
+      this.set('isSaving', true);
+
+      const done = () => {
+        this.set('isSaving', false);
+        this.set('isEditing', false);
+      };
+
+      const saveHandler = this.get('onsave');
+      if (saveHandler) {
+        const result = saveHandler();
+
+        // If the consumer passed a handler function that returns a promise,
+        // wait for it to complete before marking the save operation as finished.
+        if (result.then) {
+          return result.then(done);
+        }
       }
+
+      done();
     }
   },
 
