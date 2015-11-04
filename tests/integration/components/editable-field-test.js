@@ -44,3 +44,18 @@ test('clicking on the body cancels editing', function(assert) {
   Ember.run(() => this.$().find('#cancel').click());
   assert.ok(!this.$().text().includes('editing'));
 });
+
+test('pressing escape cancels editing', function(assert) {
+  assert.expect(1);
+
+  this.render(hbs`
+    <p id="cancel">Click me</p>
+    {{#editable-field isEditing=true}}
+      <p id="content">editing</p>
+    {{/editable-field}}
+  `);
+
+  // After pressing the "ESC" key on the keyboard, we should return to normal mode
+  Ember.run(() => this.$('#content').trigger($.Event('keyup', { keyCode: 27 })));
+  assert.ok(!this.$().text().includes('editing'));
+});

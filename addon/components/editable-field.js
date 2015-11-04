@@ -66,6 +66,17 @@ export default Ember.Component.extend({
   }),
 
   /*
+   * CANCEL ON ESCAPE PRESS
+   * Every time the user presses the "ESC" key when inside the component, we cancel editing.
+   */
+
+  keyUp: function(event) {
+    if (event.keyCode === 27) {
+      this.cancel();
+    }
+  },
+
+  /*
    * CANCEL WHEN CLICKING OUTSIDE
    * If we're in editing mode, a click on the outside (somewhere on the document)
    * will cancel editing.
