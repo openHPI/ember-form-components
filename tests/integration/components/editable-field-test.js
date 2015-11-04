@@ -27,7 +27,7 @@ test('it renders', function(assert) {
   assert.ok(this.$().text().includes('show when editing'));
 });
 
-test('clicking on the body cancels editing', function(assert) {
+test('clicking outside cancels editing', function(assert) {
   assert.expect(2);
 
   this.render(hbs`
@@ -45,11 +45,25 @@ test('clicking on the body cancels editing', function(assert) {
   assert.ok(!this.$().text().includes('editing'));
 });
 
+test('pressing enter on a form element submits the form', function(assert) {
+  assert.expect(1);
+
+  this.render(hbs`
+    {{#editable-field isEditing=true}}
+      {{input id='field'}}
+      <p id="content">editing</p>
+    {{/editable-field}}
+  `);
+
+  // After pressing the "Enter" key in the input field, we should save
+  Ember.run(() => this.$('#field').trigger($.Event('submit')));
+  assert.ok(!this.$().text().includes('editing'));
+});
+
 test('pressing escape cancels editing', function(assert) {
   assert.expect(1);
 
   this.render(hbs`
-    <p id="cancel">Click me</p>
     {{#editable-field isEditing=true}}
       <p id="content">editing</p>
     {{/editable-field}}

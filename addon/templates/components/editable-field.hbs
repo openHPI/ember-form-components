@@ -1,7 +1,9 @@
 {{#if isEditing}}
-  {{yield (action 'save') (action 'cancel')}}
-  <button {{action 'save'}}>✓</button>
-  <button {{action 'cancel'}}>x</button>
+  <form {{action 'save' on='submit'}}>
+    {{yield (action 'save') (action 'cancel')}}
+    <button {{action 'save'}}>✓</button>
+    <button {{action 'cancel'}}>x</button>
+  </form>
 {{else}}
   <a href="#" class="status internal--edit-button" {{action 'edit'}}>
     {{ clickableValue }}
