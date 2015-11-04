@@ -20,7 +20,7 @@ This component can be used as a replacement for the awesome [x-editable plugin](
 
 ~~~hbs
 {{#editable-field as |save cancel|}}
-  {{input value=value enter=save escape-press cancel}}
+  {{input value=value enter=save}}
 {{/editable-field}}
 ~~~
 
